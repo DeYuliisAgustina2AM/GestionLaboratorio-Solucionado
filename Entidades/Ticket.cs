@@ -32,6 +32,5 @@ namespace Entidades
         public Tecnico Tecnico { get; set; } //un ticket pertenece a un tecnico
 
         public ICollection<Laboratorio> Laboratorios { get; set; } = new List<Laboratorio>();
-
     }
 }

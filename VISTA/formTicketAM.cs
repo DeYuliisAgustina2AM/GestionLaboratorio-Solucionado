@@ -85,7 +85,7 @@ namespace VISTA
                 dtpFechaInicio.Value = ticket.FechaCreacion;
                 txtDescripcion.Text = ticket.DescripcionTicket;
 
-                cbCodigoPc.SelectedValue = ticket.Computadora;
+                cbCodigoPc.SelectedItem = ticket.Computadora.CodigoComputadora;
                 cbTipoTicket.SelectedItem = ticket.tipo.ToString();
                 cbCategoria.SelectedItem = ticket.categoria.ToString();
                 cbEstado.SelectedItem = ticket.estado.ToString();

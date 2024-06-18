@@ -112,5 +112,20 @@ namespace Controladora
                 throw new Exception("Error al eliminar el tecnico", ex);
             }
         }
+
+        //metodo para contar los tickets asignados a un tecnico
+        public int ContarTicketsAsignados(Tecnico tecnico)
+        {
+            try
+            {
+                var listaTickets = Context.Instancia.Tickets.ToList().AsReadOnly();
+                var ticketsAsignados = listaTickets.Where(t => t.Tecnico.TecnicoId == tecnico.TecnicoId).ToList();
+                return ticketsAsignados.Count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al contar los tickets asignados al tecnico", ex);
+            }
+        }
     }
 }
