@@ -108,9 +108,8 @@ namespace VISTA
                     ticketSeleccionado.categoria = (Categoria)Enum.Parse(typeof(Categoria), cbCategoria.SelectedItem.ToString());
                     ticketSeleccionado.estado = (Estado)Enum.Parse(typeof(Estado), cbEstado.SelectedItem.ToString());
                     ticketSeleccionado.urgencia = (Urgencia)Enum.Parse(typeof(Urgencia), cbUrgencia.SelectedItem.ToString());
-                    ticketSeleccionado.ComputadoraId = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString()).ComputadoraId;
-                    ticketSeleccionado.TecnicoId = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString()).TecnicoId;
-
+                    ticketSeleccionado.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString());
+                    ticketSeleccionado.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
 
                     var mensaje = ControladoraTicket.Instancia.ModificarTicket(ticket);
                     MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -125,8 +124,8 @@ namespace VISTA
                         categoria = (Categoria)Enum.Parse(typeof(Categoria), cbCategoria.SelectedItem.ToString()),
                         estado = (Estado)Enum.Parse(typeof(Estado), cbEstado.SelectedItem.ToString()),
                         urgencia = (Urgencia)Enum.Parse(typeof(Urgencia), cbUrgencia.SelectedItem.ToString()),
-                        ComputadoraId = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString()).ComputadoraId,
-                        TecnicoId = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString()).TecnicoId
+                        Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString()),
+                        Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString())
                     };
 
                     var mensaje = ControladoraTicket.Instancia.AgregarTicket(ticket);
