@@ -63,7 +63,7 @@ namespace VISTA
             cbCategoria.SelectedItem = ticket.categoria.ToString();
             cbEstado.SelectedItem = ticket.estado.ToString();
             cbUrgencia.SelectedItem = ticket.urgencia.ToString();
-            cbTecnico.SelectedItem = ticket.Tecnico.NombreyApellido;
+            cbTecnico.SelectedItem = ticket.Tecnico.ToString();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -90,7 +90,6 @@ namespace VISTA
                 cbCategoria.SelectedItem = ticket.categoria.ToString();
                 cbEstado.SelectedItem = ticket.estado.ToString();
                 cbUrgencia.SelectedItem = ticket.urgencia.ToString();
-                cbTecnico.SelectedItem = ticket.Tecnico.NombreyApellido;
             }
             else lblAgregaroModificar.Text = "Agregar Ticket";
         }
@@ -101,32 +100,28 @@ namespace VISTA
             {
                 if (modificar)
                 {
-                    var ticketSeleccionado = ControladoraTicket.Instancia.RecuperarTicket().FirstOrDefault(t => t.TicketId == this.ticket.TicketId);
-                    ticketSeleccionado.DescripcionTicket = txtDescripcion.Text;
-                    ticketSeleccionado.FechaCreacion = dtpFechaInicio.Value;
-                    ticketSeleccionado.tipo = (Tipo)Enum.Parse(typeof(Tipo), cbTipoTicket.SelectedItem.ToString());
-                    ticketSeleccionado.categoria = (Categoria)Enum.Parse(typeof(Categoria), cbCategoria.SelectedItem.ToString());
-                    ticketSeleccionado.estado = (Estado)Enum.Parse(typeof(Estado), cbEstado.SelectedItem.ToString());
-                    ticketSeleccionado.urgencia = (Urgencia)Enum.Parse(typeof(Urgencia), cbUrgencia.SelectedItem.ToString());
-                    ticketSeleccionado.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString());
-                    ticketSeleccionado.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
+                    ticket.DescripcionTicket = txtDescripcion.Text;
+                    ticket.FechaCreacion = dtpFechaInicio.Value;
+                    ticket.tipo = (Tipo)Enum.Parse(typeof(Tipo), cbTipoTicket.SelectedItem.ToString());
+                    ticket.categoria = (Categoria)Enum.Parse(typeof(Categoria), cbCategoria.SelectedItem.ToString());
+                    ticket.estado = (Estado)Enum.Parse(typeof(Estado), cbEstado.SelectedItem.ToString());
+                    ticket.urgencia = (Urgencia)Enum.Parse(typeof(Urgencia), cbUrgencia.SelectedItem.ToString());
+                    ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString());
+                    ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
 
                     var mensaje = ControladoraTicket.Instancia.ModificarTicket(ticket);
                     MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    var ticket = new Ticket
-                    {
-                        DescripcionTicket = txtDescripcion.Text,
-                        FechaCreacion = dtpFechaInicio.Value,
-                        tipo = (Tipo)Enum.Parse(typeof(Tipo), cbTipoTicket.SelectedItem.ToString()),
-                        categoria = (Categoria)Enum.Parse(typeof(Categoria), cbCategoria.SelectedItem.ToString()),
-                        estado = (Estado)Enum.Parse(typeof(Estado), cbEstado.SelectedItem.ToString()),
-                        urgencia = (Urgencia)Enum.Parse(typeof(Urgencia), cbUrgencia.SelectedItem.ToString()),
-                        Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString()),
-                        Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString())
-                    };
+                    ticket.DescripcionTicket = txtDescripcion.Text;
+                    ticket.FechaCreacion = dtpFechaInicio.Value;
+                    ticket.tipo = (Tipo)Enum.Parse(typeof(Tipo), cbTipoTicket.SelectedItem.ToString());
+                    ticket.categoria = (Categoria)Enum.Parse(typeof(Categoria), cbCategoria.SelectedItem.ToString());
+                    ticket.estado = (Estado)Enum.Parse(typeof(Estado), cbEstado.SelectedItem.ToString());
+                    ticket.urgencia = (Urgencia)Enum.Parse(typeof(Urgencia), cbUrgencia.SelectedItem.ToString());
+                    ticket.Computadora = ControladoraComputadora.Instancia.RecuperarComputadoras().FirstOrDefault(c => c.CodigoComputadora == cbCodigoPc.SelectedItem.ToString());
+                    ticket.Tecnico = ControladoraTecnico.Instancia.RecuperarTecnicos().FirstOrDefault(t => t.NombreyApellido == cbTecnico.SelectedItem.ToString());
 
                     var mensaje = ControladoraTicket.Instancia.AgregarTicket(ticket);
                     MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);

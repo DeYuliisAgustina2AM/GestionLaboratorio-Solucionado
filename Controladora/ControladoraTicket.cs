@@ -31,8 +31,8 @@ namespace Controladora
         {
             try
             {
-                Context.Instancia.Tickets.ToList().AsReadOnly();
-                return Context.Instancia.Tickets.ToList().AsReadOnly();
+                Context.Instancia.Tickets.Include(t => t.Computadora).Include(t => t.Tecnico).ToList().AsReadOnly();
+                return Context.Instancia.Tickets.Include(t => t.Computadora).Include(t => t.Tecnico).ToList().AsReadOnly();
             }
             catch (Exception)
             {
@@ -49,7 +49,7 @@ namespace Controladora
                 if (ticketEncontrado == null)
                 {
                     Context.Instancia.Tickets.Add(ticket);
-                   
+
                     int agregados = Context.Instancia.SaveChanges();
                     if (agregados > 0)
                     {
@@ -76,9 +76,9 @@ namespace Controladora
                 var ticketEncontrado = listaTickets.FirstOrDefault(t => t.Computadora.ComputadoraId == ticket.ComputadoraId); //busco el ticket a modificar por id en la lista de tickets para evitar que se repitan los id de las computadoras s
                 if (ticketEncontrado != null)
                 {
-
                     Context.Instancia.Tickets.Update(ticket);
-                    int insertados = context.SaveChanges();
+
+                    int insertados = Context.Instancia.SaveChanges();
 
                     if (insertados > 0)
                     {
@@ -93,7 +93,7 @@ namespace Controladora
             }
             catch (Exception ex)
             {
-                return "Error desconocido" + ex ;
+                return "Error desconocido" + ex;
             }
         }
 
@@ -101,7 +101,7 @@ namespace Controladora
         {
             try
             {
-                var listaComputadoras= Context.Instancia.Computadoras.ToList().AsReadOnly();
+                var listaComputadoras = Context.Instancia.Computadoras.ToList().AsReadOnly();
                 var listaTickets = Context.Instancia.Tickets.ToList().AsReadOnly();
                 var ticketEncontrado = listaComputadoras.FirstOrDefault(t => t.ComputadoraId == ticket.ComputadoraId); //busco el ticket a eliminar por id en la lista de tickets para evitar que se repitan
                 if (ticketEncontrado != null)
